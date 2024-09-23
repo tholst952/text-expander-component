@@ -5,8 +5,7 @@ export default function App() {
   return (
     <div>
       <TextExpander
-        collapsedNumWords={12}
-        collapsedNumWords={20}
+        collapsedNumWords={10}
         expandButtonText="Show text"
         collapseButtonText="Collapse text"
         buttonColor="#ff6622"
@@ -33,7 +32,7 @@ export default function App() {
 
       <TextExpander
         className="box"
-        collapsedNumWords={20}
+        collapsedNumWords={10}
         expandButtonText="Show text"
         collapseButtonText="Collapse text"
         buttonColor="#ff6622"
@@ -47,10 +46,6 @@ export default function App() {
   );
 }
 
-function TextExpanderItem() {
-  return;
-}
-
 function TextExpander({
   children,
   className,
@@ -58,20 +53,20 @@ function TextExpander({
   expandButtonText,
   collapseButtonText,
   buttonColor,
-  expanded,
 }) {
-  const [toggleText, setToggleText] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  function handleToggle() {
-    setToggleText((toggleText) => !toggleText);
-    expanded = !expanded;
+  function handleShowMore() {
+    setIsOpen((isOpen) => !isOpen);
   }
 
   return (
-    <div className={className} expanded={expanded}>
-      {children.split(" ").slice(0, collapsedNumWords).join(" ")}
-      <button style={{ color: buttonColor }}>
-        {expanded ? collapseButtonText : expandButtonText}
+    <div className={className}>
+      {isOpen
+        ? children
+        : children.split(" ").slice(0, collapsedNumWords).join(" ") + "... "}
+      <button style={{ color: buttonColor }} onClick={handleShowMore}>
+        {isOpen ? collapseButtonText : expandButtonText}
       </button>
     </div>
   );
