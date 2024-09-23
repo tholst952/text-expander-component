@@ -3,13 +3,8 @@ import "./index.css";
 
 export default function App() {
   return (
-    <div>
-      <TextExpander
-        collapsedNumWords={10}
-        expandButtonText="Show text"
-        collapseButtonText="Collapse text"
-        buttonColor="#ff6622"
-      >
+    <div className="text-expander-container">
+      <TextExpander className="box2">
         Space travel is the ultimate adventure! Imagine soaring past the stars
         and exploring new worlds. It's the stuff of dreams and science fiction,
         but believe it or not, space travel is a real thing. Humans and robots
@@ -22,6 +17,7 @@ export default function App() {
         expandButtonText="Show text"
         collapseButtonText="Collapse text"
         buttonColor="#ff6622"
+        className="box2"
       >
         Space travel requires some seriously amazing technology and
         collaboration between countries, private companies, and international
@@ -30,13 +26,7 @@ export default function App() {
         foot on the moon or when rovers were sent to roam around on Mars.
       </TextExpander>
 
-      <TextExpander
-        className="box"
-        collapsedNumWords={10}
-        expandButtonText="Show text"
-        collapseButtonText="Collapse text"
-        buttonColor="#ff6622"
-      >
+      <TextExpander expanded={true} className="box">
         Space missions have given us incredible insights into our universe and
         have inspired future generations to keep reaching for the stars. Space
         travel is a pretty cool thing to think about. Who knows what we'll
@@ -49,24 +39,34 @@ export default function App() {
 function TextExpander({
   children,
   className,
-  collapsedNumWords,
-  expandButtonText,
-  collapseButtonText,
-  buttonColor,
+  collapsedNumWords = 10,
+  expandButtonText = "Show more",
+  collapseButtonText = "Show less",
+  buttonColor = "blue",
+  expanded,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(expanded);
 
   function handleShowMore() {
-    setIsOpen((isOpen) => !isOpen);
+    setIsExpanded((isExpanded) => !isExpanded);
   }
+
+  const buttonStyles = {
+    cursor: "pointer",
+    color: buttonColor,
+    background: "none",
+    border: "none",
+    display: "inline-block",
+    marginLeft: "4px",
+  };
 
   return (
     <div className={className}>
-      {isOpen
+      {isExpanded
         ? children
         : children.split(" ").slice(0, collapsedNumWords).join(" ") + "... "}
-      <button style={{ color: buttonColor }} onClick={handleShowMore}>
-        {isOpen ? collapseButtonText : expandButtonText}
+      <button style={buttonStyles} onClick={handleShowMore}>
+        {isExpanded ? collapseButtonText : expandButtonText}
       </button>
     </div>
   );
