@@ -43,14 +43,15 @@ function TextExpander({
   expandButtonText = "Show more",
   collapseButtonText = "Show less",
   buttonColor = "blue",
-  expanded,
+  expanded = false,
+  highlightColor = "#63e6be",
 }) {
   const [isExpanded, setIsExpanded] = useState(expanded);
   const [highlight, setHighlight] = useState("#f7f7f7");
 
   function handleShowMore() {
     setIsExpanded((isExpanded) => !isExpanded);
-    setHighlight(isExpanded ? "#f7f7f7" : "#63e6be");
+    setHighlight(isExpanded ? "#f7f7f7" : highlightColor);
   }
 
   const buttonStyles = {
@@ -58,15 +59,17 @@ function TextExpander({
     color: buttonColor,
     background: "none",
     border: "none",
-    display: "inline-block",
+    font: "inherit",
     marginLeft: "4px",
   };
 
   return (
     <div className={className} style={{ backgroundColor: highlight }}>
-      {isExpanded
-        ? children
-        : children.split(" ").slice(0, collapsedNumWords).join(" ") + "... "}
+      <span>
+        {isExpanded
+          ? children
+          : children.split(" ").slice(0, collapsedNumWords).join(" ") + "... "}
+      </span>
       <button style={buttonStyles} onClick={handleShowMore}>
         {isExpanded ? collapseButtonText : expandButtonText}
       </button>
