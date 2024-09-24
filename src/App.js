@@ -4,7 +4,7 @@ import "./index.css";
 export default function App() {
   return (
     <div className="text-expander-container">
-      <TextExpander className="box2">
+      <TextExpander className="box">
         Space travel is the ultimate adventure! Imagine soaring past the stars
         and exploring new worlds. It's the stuff of dreams and science fiction,
         but believe it or not, space travel is a real thing. Humans and robots
@@ -17,7 +17,7 @@ export default function App() {
         expandButtonText="Show text"
         collapseButtonText="Collapse text"
         buttonColor="#ff6622"
-        className="box2"
+        className="box"
       >
         Space travel requires some seriously amazing technology and
         collaboration between countries, private companies, and international
@@ -46,9 +46,11 @@ function TextExpander({
   expanded,
 }) {
   const [isExpanded, setIsExpanded] = useState(expanded);
+  const [highlight, setHighlight] = useState("#f7f7f7");
 
   function handleShowMore() {
     setIsExpanded((isExpanded) => !isExpanded);
+    setHighlight(isExpanded ? "#f7f7f7" : "#63e6be");
   }
 
   const buttonStyles = {
@@ -61,7 +63,7 @@ function TextExpander({
   };
 
   return (
-    <div className={className}>
+    <div className={className} style={{ backgroundColor: highlight }}>
       {isExpanded
         ? children
         : children.split(" ").slice(0, collapsedNumWords).join(" ") + "... "}

@@ -1,7 +1,7 @@
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -12,30 +12,18 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  /* background-color: #e5dbff; */
 }
 
 .text-expander-container {
   width: 40rem;
   margin: 5rem auto;
   display: grid;
-  gap: 12px;
-}
-
-.box2 {
-  padding: 10px;
-  border: 1px solid #070707;
-  border-radius: 7px;
-  background-color: #63e6be;
+  gap: 1rem;
 }
 
 .box {
-  padding: 10px;
+  padding: 16px;
   border: 1px solid #ccc;
   border-radius: 7px;
   background-color: #f7f7f7;
-}
-
-.button {
-  cursor: pointer;
 }
